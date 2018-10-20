@@ -1,0 +1,24 @@
+{
+  "name": "hackgt5-chatbot",
+  "version": "1.0.0",
+  "description": "A chatbot trained from the Ubuntu Dialogue Corpus using tensorflow seg2seg model",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JING1201/hackgt5-ubuntu-chatbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JING1201/hackgt5-ubuntu-chatbot/issues"
+  },
+  "homepage": "https://github.com/JING1201/hackgt5-ubuntu-chatbot#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  }
+}

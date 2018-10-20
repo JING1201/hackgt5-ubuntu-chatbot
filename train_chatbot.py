@@ -15,8 +15,8 @@ model_checkpoints = model_dir + "/chat.ckpt"
 
 def build_dataset(use_stored_dictionary=False):
     sen_l1, sen_l2 = get_ubuntu_corpus_data()
-    clean_sen_l1 = [clean_sentence(s) for s in sen_l1][:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
-    clean_sen_l2 = [clean_sentence(s) for s in sen_l2][:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
+    clean_sen_l1 = [clean_sentence(s) for s in sen_l1]#[:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
+    clean_sen_l2 = [clean_sentence(s) for s in sen_l2]#[:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
     filt_clean_sen_l1, filt_clean_sen_l2 = filter_sentence_length(clean_sen_l1, clean_sen_l2, max_len=10)
     if not use_stored_dictionary:
         dict_l1 = create_indexed_dictionary(filt_clean_sen_l1, dict_size=10000, storage_path=path_l1_dict)
