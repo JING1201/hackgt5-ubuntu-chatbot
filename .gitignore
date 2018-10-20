@@ -1,0 +1,14 @@
+.DS_Store
+
+.ipynb_checkpoints/
+.vscode/
+Chatbot Experiment 1.5 - Testing with provided data set.ipynb
+Chatbot Experiment 1.ipynb
+Chatbot Experiment 2 - Training.ipynb
+Chatbot Experiment 3 - Testing.ipynb
+__pycache__/
+data_utils.pyc
+frames.json
+seq2seq/
+twcs.csv
+Ubuntu-dialogue-corpus
