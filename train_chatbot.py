@@ -15,13 +15,13 @@ model_checkpoints = model_dir + "/chat.ckpt"
 
 def build_dataset(use_stored_dictionary=False):
     sen_l1, sen_l2 = get_ubuntu_corpus_data()
-    clean_sen_l1 = [clean_sentence(s) for s in sen_l1][:60000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
-    clean_sen_l2 = [clean_sentence(s) for s in sen_l2][:60000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
+    clean_sen_l1 = [clean_sentence(s) for s in sen_l1][:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
+    clean_sen_l2 = [clean_sentence(s) for s in sen_l2][:30000] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
     filt_clean_sen_l1, filt_clean_sen_l2 = filter_sentence_length(clean_sen_l1, clean_sen_l2, max_len=10)
     if not use_stored_dictionary:
         #change dict_size according to input size
-        dict_l1 = create_indexed_dictionary(filt_clean_sen_l1, dict_size=15000, storage_path=path_l1_dict)
-        dict_l2 = create_indexed_dictionary(filt_clean_sen_l2, dict_size=15000, storage_path=path_l2_dict)
+        dict_l1 = create_indexed_dictionary(filt_clean_sen_l1, dict_size=10000, storage_path=path_l1_dict)
+        dict_l2 = create_indexed_dictionary(filt_clean_sen_l2, dict_size=10000, storage_path=path_l2_dict)
     else:
         dict_l1 = pickle.load(open(path_l1_dict, "rb"))
         dict_l2 = pickle.load(open(path_l2_dict, "rb"))
@@ -72,7 +72,7 @@ def train():
         current_step = 0
         bucket = 0
         steps_per_checkpoint = 100
-        max_steps = 3000 #change to a larger number later
+        max_steps = 2500 #change to a larger number later
         while current_step < max_steps:
             start_time = time.time()
             encoder_inputs, decoder_inputs, target_weights = model.get_batch([data_set], bucket)

@@ -21,11 +21,15 @@ def read_conversations(file):
 
 def get_tokenized_sequencial_sentences(conversations):
    for conversation in conversations:
+       for i in range (len(conversation)-1):
+           yield (conversation[i].split(" "), conversation[i+1].split(" "))
+       '''
        max = len(conversation) - 1
        i = 0
        while i < max:
            yield (conversation[i].split(" "), conversation[i+1].split(" "))
            i += 2
+        '''
 
     
 def generate_conv_tuple(file):
