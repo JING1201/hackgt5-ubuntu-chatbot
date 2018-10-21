@@ -45,6 +45,7 @@ if __name__ == "__main__":
     @route('/api')
     def api():
         in_sentence = request.query.sentence
+        #print (in_sentence)
         _, data_set = prepare_sentence(in_sentence, dict_l1, max_lengths)
         resp = [{"in": in_sentence, "out": decode(data_set)}]
         return dict(data=resp)

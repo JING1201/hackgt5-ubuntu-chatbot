@@ -21,15 +21,19 @@ def read_conversations(file):
 
 def get_tokenized_sequencial_sentences(conversations):
    for conversation in conversations:
-       for i in range(len(conversation) - 1):
+       max = len(conversation) - 1
+       i = 0
+       while i < max:
            yield (conversation[i].split(" "), conversation[i+1].split(" "))
+           i += 2
+
     
 def generate_conv_tuple(file):
     conversations = read_conversations(file)
     return tuple(zip(*list(get_tokenized_sequencial_sentences(conversations))))
 
 def get_ubuntu_corpus_data():
-    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv')
-    #file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
+    #file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv')
+    file = (pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
     #file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_196.csv'))
     return generate_conv_tuple(file)

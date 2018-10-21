@@ -4,12 +4,13 @@ import os
 import numpy as np
 import tensorflow as tf
 import data_utils
+from flask import Flask, render_template, request, jsonify
 from corpora_tools import clean_sentence, sentences_to_indexes, prepare_sentences
 from train_chatbot import get_seq2seq_model, path_l1_dict, path_l2_dict
 model_dir = os.getcwd()+"/tmp/chat"
 
 def prepare_sentence(sentence, dict_l1, max_length):
-   sents = [sentence.split(" ")]
+   sents = [str(sentence).split(" ")]
    clean_sen_l1 = [clean_sentence(s) for s in sents]
    idx_sentences_l1 = sentences_to_indexes(clean_sen_l1, dict_l1)
    data_set = prepare_sentences(idx_sentences_l1, [[]], max_length, max_length)
@@ -40,12 +41,15 @@ max_lengths = 10
 dict_lengths = (dict_l1_length, dict_l2_length)
 max_sentence_lengths = (max_lengths, max_lengths)
 
-@app.route('/prediction', methods=['POST', 'GET'])
-def prediction():
-    in_sentence = str(request.json['message'])
+
+app = Flask(__name__)
+
+@app.route("/ask", methods=['POST'])
+def ask():
+    in_sentence = request.form['messageText'].encode('utf-8').strip()
     _, data_set = prepare_sentence(in_sentence, dict_l1, max_lengths)
-    response =  decode(data_set)
-    return jsonify(response)
+    response =  str(decode(data_set))
+    return jsonify({'status':'OK','answer':response})
 
 @app.route('/')
 def main():
