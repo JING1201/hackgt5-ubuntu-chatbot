@@ -7,7 +7,7 @@ import data_utils
 from flask import Flask, render_template, request, jsonify
 from corpora_tools import clean_sentence, sentences_to_indexes, prepare_sentences
 from train_chatbot import get_seq2seq_model, path_l1_dict, path_l2_dict
-model_dir = os.getcwd()+"/tmp/chat"
+model_dir = "tmp/chat"
 
 def prepare_sentence(sentence, dict_l1, max_length):
    sents = [str(sentence).split(" ")]

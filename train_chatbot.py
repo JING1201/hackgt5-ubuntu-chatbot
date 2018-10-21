@@ -8,9 +8,9 @@ import tensorflow as tf
 from seq2seq_model import Seq2SeqModel
 from corpora_tools import *
 from corpora_get import *
-path_l1_dict = os.getcwd()+"/tmp/l1_dict.p"
-path_l2_dict = os.getcwd()+"/tmp/l2_dict.p"
-model_dir = os.getcwd()+"/tmp/chat"
+path_l1_dict = "tmp/l1_dict.p"
+path_l2_dict = "tmp/l2_dict.p"
+model_dir = "tmp/chat"
 model_checkpoints = model_dir + "/chat.ckpt"
 
 def build_dataset(use_stored_dictionary=False):
