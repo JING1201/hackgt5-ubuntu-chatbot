@@ -37,7 +37,7 @@ dict_l1_length = len(dict_l1)
 dict_l2 = pickle.load(open(path_l2_dict, "rb"))
 dict_l2_length = len(dict_l2)
 inv_dict_l2 = {v: k for k, v in dict_l2.items()}
-max_lengths = 10
+max_lengths = 20
 dict_lengths = (dict_l1_length, dict_l2_length)
 max_sentence_lengths = (max_lengths, max_lengths)
 
