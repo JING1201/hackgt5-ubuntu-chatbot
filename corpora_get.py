@@ -37,7 +37,9 @@ def generate_conv_tuple(file):
     return tuple(zip(*list(get_tokenized_sequencial_sentences(conversations))))
 
 def get_ubuntu_corpus_data():
-    #file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv')
-    file = (pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
+    print("Getting ubuntu corpus data...")
+    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv') 
+    #file = (pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
     #file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_196.csv'))
+    print("Finished getting ubuntu corpus data!")
     return generate_conv_tuple(file)
