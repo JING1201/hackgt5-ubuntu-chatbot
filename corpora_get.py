@@ -1,6 +1,7 @@
 import pandas
 
 def read_conversations(file):
+    print("Start reading conversations...")
     conversations = [] #list of lists
     current_id = file['dialogueID'][0]
     current_conversation = []
@@ -17,6 +18,7 @@ def read_conversations(file):
         else:
             current_conversation[len(current_conversation)-1] += str(row['text']) #one person talking continuously
         prev_user = row['from']
+    print("Finished reading conversations!")
     return conversations
 
 def get_tokenized_sequencial_sentences(conversations):
@@ -38,7 +40,8 @@ def generate_conv_tuple(file):
 
 def get_ubuntu_corpus_data():
     print("Getting ubuntu corpus data...")
-    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv') 
+    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueTextTiny.csv') 
+    #file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv') 
     #file = (pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
     #file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_196.csv'))
     print("Finished getting ubuntu corpus data!")

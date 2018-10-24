@@ -89,11 +89,14 @@ class Seq2SeqModel(object):
         b = tf.get_variable("proj_b", [self.target_vocab_size])
       output_projection = (w, b)
 
-      def sampled_loss(inputs, labels):
-        with tf.device("/cpu:0"):
-          labels = tf.reshape(labels, [-1, 1])
-          return tf.nn.sampled_softmax_loss(w_t, b, inputs, labels, num_samples,
-                                            self.target_vocab_size)
+      def sampled_loss(labels, logits): 
+        labels = tf.reshape(labels, [-1, 1]) 
+        return tf.nn.sampled_softmax_loss(w_t, b, labels, logits, num_samples, self.target_vocab_size)
+        #***************************** below is for tensorflow==0.12.1
+        # with tf.device("/cpu:0"):
+        #   labels = tf.reshape(labels, [-1, 1])
+        #   return tf.nn.sampled_softmax_loss(w_t, b, inputs, labels, num_samples,
+        #                                     self.target_vocab_size)
       softmax_loss_function = sampled_loss
 
     # Create the internal multi-layer cell for our RNN.

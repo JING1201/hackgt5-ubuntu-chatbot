@@ -8,6 +8,7 @@ import tensorflow as tf
 from seq2seq_model import Seq2SeqModel
 from corpora_tools import *
 from corpora_get import *
+import pdb
 path_l1_dict = "tmp/l1_dict.p"
 path_l2_dict = "tmp/l2_dict.p"
 model_dir = "tmp/chat"
@@ -68,13 +69,14 @@ def get_seq2seq_model(session, forward_only, dict_lengths, max_sentence_lengths,
 def train():
     with tf.Session() as sess:
         model = get_seq2seq_model(sess, False, dict_lengths, max_sentence_lengths, model_dir)
+        pdb.set_trace()
         # This is the training loop.
         step_time, loss = 0.0, 0.0
         current_step = 0
         bucket = 0
         steps_per_checkpoint = 100
         max_steps = 10000 #change to a larger number later
-        Print("Start while loop...")
+        print("Start while loop...")
         while current_step < max_steps:
             start_time = time.time()
             encoder_inputs, decoder_inputs, target_weights = model.get_batch([data_set], bucket)
