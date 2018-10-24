@@ -19,11 +19,11 @@ def build_dataset(use_stored_dictionary=False):
     sen_l1, sen_l2 = get_ubuntu_corpus_data()
     clean_sen_l1 = [clean_sentence(s) for s in sen_l1] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
     clean_sen_l2 = [clean_sentence(s) for s in sen_l2] ### OTHERWISE IT DOES NOT RUN ON MY LAPTOP
-    filt_clean_sen_l1, filt_clean_sen_l2 = filter_sentence_length(clean_sen_l1, clean_sen_l2, max_len=20)
+    filt_clean_sen_l1, filt_clean_sen_l2 = filter_sentence_length(clean_sen_l1, clean_sen_l2, max_len=40)
     if not use_stored_dictionary:
         #change dict_size according to input size
-        dict_l1 = create_indexed_dictionary(filt_clean_sen_l1, dict_size=2000, storage_path=path_l1_dict)
-        dict_l2 = create_indexed_dictionary(filt_clean_sen_l2, dict_size=2000, storage_path=path_l2_dict)
+        dict_l1 = create_indexed_dictionary(filt_clean_sen_l1, dict_size=80000, storage_path=path_l1_dict)
+        dict_l2 = create_indexed_dictionary(filt_clean_sen_l2, dict_size=80000, storage_path=path_l2_dict)
     else:
         dict_l1 = pickle.load(open(path_l1_dict, "rb"))
         dict_l2 = pickle.load(open(path_l2_dict, "rb"))
@@ -49,8 +49,8 @@ def get_seq2seq_model(session, forward_only, dict_lengths, max_sentence_lengths,
             source_vocab_size=dict_lengths[0],
             target_vocab_size=dict_lengths[1],
             buckets=[max_sentence_lengths],
-            size=256,
-            num_layers=2,
+            size=512,
+            num_layers=3,
             max_gradient_norm=5.0,
             batch_size=128,
             learning_rate=1.0,
@@ -74,8 +74,8 @@ def train():
         step_time, loss = 0.0, 0.0
         current_step = 0
         bucket = 0
-        steps_per_checkpoint = 100
-        max_steps = 10000 #change to a larger number later
+        steps_per_checkpoint = 50
+        max_steps = 80000 #change to a larger number later
         print("Start while loop...")
         while current_step < max_steps:
             start_time = time.time()

@@ -40,9 +40,8 @@ def generate_conv_tuple(file):
 
 def get_ubuntu_corpus_data():
     print("Getting ubuntu corpus data...")
-    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueTextTiny.csv') 
-    #file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv') 
-    #file = (pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv'))
-    #file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_196.csv'))
+    file = pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText.csv') 
+    file.append((pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_301.csv')))
+    file.append(pandas.read_csv('Ubuntu-dialogue-corpus/dialogueText_196.csv'))
     print("Finished getting ubuntu corpus data!")
     return generate_conv_tuple(file)
